@@ -29,3 +29,9 @@ Docs: <https://docs.dynatrace.com/docs/manage/network-zones-classic/network-zone
 - Makes OneAgent send its traffic only to the relevant ActiveGate
 
 ## Host Group
+
+## Real User Monitoring (RUM)
+User Session:
+    Session timeline
+    Session replay - Video mode and come with more cost
+

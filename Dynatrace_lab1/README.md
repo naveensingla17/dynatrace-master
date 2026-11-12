@@ -1,10 +1,11 @@
 # Dynatrace Lab 1 – Monitor a Spring PetClinic App on AWS EC2
 
-A hands-on lab that sets up Dynatrace monitoring for a sample Java app running on AWS EC2:
+A hands-on lab that sets up Dynatrace monitoring for a sample Java app running on AWS EC2, then explores what Dynatrace shows:
 
 1. Install an **Environment ActiveGate** and create a **Network Zone**
 2. Deploy the **Spring PetClinic** application
 3. Install **OneAgent** on the app host. Its traffic goes through the ActiveGate.
+4. Explore the Dynatrace UI: **APM**, **Real User Monitoring (Experience Vitals)**, **Smartscape** and **synthetic monitoring**
 
 ## Architecture
 
@@ -23,6 +24,7 @@ A hands-on lab that sets up Dynatrace monitoring for a sample Java app running o
 | Network Zone | `petclinic` |
 | ActiveGate Group | `ag01` |
 | Host name | `petclinic1` |
+| Host group | `petclinic01` (set after installation, see [Update the host group](#update-the-host-group)) |
 | Host property | `env=demo` |
 | App port | `8080` |
 
@@ -42,6 +44,36 @@ Follow the guides in this order:
 | 1 | [01. Install_agent_gateway.md](01.%20Install_agent_gateway.md) | Security group rules, VMs, token creation, ActiveGate and Network Zone |
 | 2 | [02. install_petclinic_application.md](02.%20install_petclinic_application.md) | Java 17, Maven, build PetClinic, run it as a `systemd` service |
 | 3 | [03. installOneagent.md](03.%20installOneagent.md) | Install OneAgent on the app host and disable auto-updates |
+| 4 | [04. Explore_UI.md](04.%20Explore_UI.md) | APM (services, backtrace), RUM / Experience Vitals, session replay, Web Vitals, Apdex, synthetic users, conversion goals |
+
+## Post-installation tasks
+
+### Update the host group
+
+In Gen3 you can't change the host group in the UI. Use `oneagentctl` on the host:
+
+```bash
+cd /opt/dynatrace/oneagent/agent/tools/
+
+systemctl stop oneagent.service
+./oneagentctl --set-host-group=petclinic01
+systemctl start oneagent.service
+
+systemctl status oneagent.service
+```
+
+> Restart the monitored application (`systemctl restart petclinic.service`) after changing the OneAgent configuration.
+
+### Observe application monitoring
+
+Make changes in the PetClinic app (add owners and pets, browse pages) and watch the activity appear in the Dynatrace UI.
+
+### Explore Smartscape
+
+1. Check service dependencies
+2. Check the infrastructure overview
+3. Check upstream and downstream relationships
+4. Explore the full topology
 
 ## Repository structure
 
@@ -51,6 +83,7 @@ Dynatrace_lab1/
 ├── 01. Install_agent_gateway.md          # ActiveGate + Network Zone
 ├── 02. install_petclinic_application.md  # PetClinic app setup
 ├── 03. installOneagent.md                # OneAgent install
+├── 04. Explore_UI.md                     # APM, RUM, synthetic monitoring
 ├── outputs/                              # Console output captured during installs
 │   ├── activegateway_installation_output.md
 │   └── oneagent_installation_output.md
@@ -70,7 +103,19 @@ systemctl status oneagent.service
 curl -I http://localhost:8080
 ```
 
-In Dynatrace, go to **Fleet Management** (or **Deployment Status**). The ActiveGate and the `petclinic1` host should both be listed as connected.
+In Dynatrace, go to **Fleet Management** (or **Deployment Status** in Classic). The ActiveGate and the `petclinic1` host should both be listed as connected.
+
+## Quick navigation in Dynatrace
+
+| What | Path |
+|------|------|
+| Deployment status | **Fleet Management** |
+| Services | **Search → Services → Tomcat** |
+| Request outliers | **Services → Tomcat → More actions → Analyze request outliers** |
+| Session replay | **Experience Vitals → petclinic → Open with Users & Sessions → session → Replay** |
+| User sessions dashboard | **Dashboards → User Sessions Overview** |
+| Conversion goals | **Settings → frontend app → Process and contextualize → Conversion goals** |
+| OneAgent auto-update | **Settings → Fleet Management → OneAgent version update** |
 
 ## Security notes
 
@@ -86,6 +131,14 @@ In Dynatrace, go to **Fleet Management** (or **Deployment Status**). The ActiveG
 ```
 
 Then terminate the EC2 instances in AWS.
+
+## Related notes
+
+- [Interview questions](../Interview_questions.md)
+- [Gen3 vs Classic differences](../gen3_difference.md)
+- [Architecture](../Architecture.md)
+- [Knowledge notes](../knowledge.md)
+- [Practice tasks](../Tasks-practice_list.md)
 
 ## References
 
