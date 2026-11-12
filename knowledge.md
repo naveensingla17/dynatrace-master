@@ -27,3 +27,5 @@ Docs: <https://docs.dynatrace.com/docs/manage/network-zones-classic/network-zone
 
 - A configuration setting, not a component you install
 - Makes OneAgent send its traffic only to the relevant ActiveGate
+
+## Host Group
