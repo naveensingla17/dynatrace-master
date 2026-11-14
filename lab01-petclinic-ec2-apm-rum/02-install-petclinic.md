@@ -5,19 +5,19 @@ Source: <https://github.com/spring-projects/spring-petclinic>
 ## Checklist
 
 1. [Basic preparation and setup](#1-basic-preparation-and-setup)
-   - [ ] [1.1 Create a VM](#11-create-a-vm)
-   - [ ] [1.2 Log in and switch to root](#12-log-in-and-switch-to-root)
-   - [ ] [1.3 Install Git](#13-install-git)
-   - [ ] [1.4 Install Java 17](#14-install-java-17)
-   - [ ] [1.5 Install Maven](#15-install-maven)
+   - [x] [1.1 Create a VM](#11-create-a-vm)
+   - [x] [1.2 Log in and switch to root](#12-log-in-and-switch-to-root)
+   - [x] [1.3 Install Git](#13-install-git)
+   - [x] [1.4 Install Java 17](#14-install-java-17)
+   - [x] [1.5 Install Maven](#15-install-maven)
 2. [Build and test PetClinic](#2-build-and-test-petclinic)
-   - [ ] [2.1 Clone the repository](#21-clone-the-repository)
-   - [ ] [2.2 Build the JAR file](#22-build-the-jar-file)
-   - [ ] [2.3 Start the app (quick test)](#23-start-the-app-quick-test)
+   - [x] [2.1 Clone the repository](#21-clone-the-repository)
+   - [x] [2.2 Build the JAR file](#22-build-the-jar-file)
+   - [x] [2.3 Start the app (quick test)](#23-start-the-app-quick-test)
 3. [Run PetClinic as a service](#3-run-petclinic-as-a-service)
-   - [ ] [3.1 Create the service](#31-create-the-service)
-   - [ ] [3.2 Enable and start the service](#32-enable-and-start-the-service)
-   - [ ] [3.3 Reference](#33-reference)
+   - [x] [3.1 Create the service](#31-create-the-service)
+   - [x] [3.2 Enable and start the service](#32-enable-and-start-the-service)
+   - [x] [3.3 Reference](#33-reference)
 
 ---
 
@@ -32,7 +32,7 @@ Complete these steps on the PetClinic host before you build the app.
 | Instance type | `t2.medium` (2 vCPU, 4 GB RAM) |
 | Storage | 60 GB |
 | Image | Amazon Linux |
-| Security group | **default** (updated in [ActiveGate guide 1.1](01.%20Install_ActiveGate.md#11-update-the-default-security-group)) |
+| Security group | **default** (updated in [ActiveGate guide 1.1](01-install-activegate.md#11-update-the-default-security-group)) |
 
 ### 1.2 Log in and switch to root
 

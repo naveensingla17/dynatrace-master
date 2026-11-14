@@ -32,7 +32,7 @@ A hands-on lab that sets up Dynatrace monitoring for a sample Java app running o
 
 - An AWS account with permission to create EC2 instances and edit security groups
 - A Dynatrace trial tenant (a temporary email is fine for registration)
-- A Dynatrace **Platform Token** with the scopes listed in [01. Install_ActiveGate.md](01.%20Install_ActiveGate.md#14-generate-a-token)
+- A Dynatrace **Platform Token** with the scopes listed in [01-install-activegate.md](01-install-activegate.md#14-generate-a-token)
 - An SSH key pair (`.pem`) for the EC2 instances
 
 ## Lab steps
@@ -41,10 +41,10 @@ Follow the guides in this order:
 
 | # | Guide | What it covers |
 |---|---|---|
-| 1 | [01. Install_ActiveGate.md](01.%20Install_ActiveGate.md) | Security group rules, VMs, token creation, ActiveGate and Network Zone |
-| 2 | [02. install_petclinic_application.md](02.%20install_petclinic_application.md) | Java 17, Maven, build PetClinic, run it as a `systemd` service |
-| 3 | [03. installOneagent.md](03.%20installOneagent.md) | Install OneAgent on the app host and disable auto-updates |
-| 4 | [04. Explore_UI.md](04.%20Explore_UI.md) | APM (services, backtrace), RUM / Experience Vitals, session replay, Web Vitals, Apdex, synthetic users, conversion goals |
+| 1 | [01-install-activegate.md](01-install-activegate.md) | Security group rules, VMs, token creation, ActiveGate and Network Zone |
+| 2 | [02-install-petclinic.md](02-install-petclinic.md) | Java 17, Maven, build PetClinic, run it as a `systemd` service |
+| 3 | [03-install-oneagent.md](03-install-oneagent.md) | Install OneAgent on the app host and disable auto-updates |
+| 4 | [04-explore-apm-and-rum.md](04-explore-apm-and-rum.md) | APM (services, backtrace), RUM / Experience Vitals, session replay, Web Vitals, Apdex, synthetic users, conversion goals |
 
 ## Post-installation tasks
 
@@ -134,11 +134,11 @@ Then terminate the EC2 instances in AWS.
 
 ## Related notes
 
-- [Interview questions](../Interview_questions.md)
-- [Gen3 vs Classic differences](../gen3_difference.md)
-- [Architecture](../Architecture.md)
-- [Knowledge notes](../knowledge.md)
-- [Practice tasks](../Tasks-practice_list.md)
+- [Interview questions](../notes/06-interview-questions.md)
+- [Gen3 vs Classic differences](../notes/02-gen3-vs-classic.md)
+- [Architecture](../notes/01-architecture.md)
+- [Knowledge notes](../notes/03-knowledge-notes.md)
+- [Practice tasks](../notes/04-practice-tasks.md)
 
 ## References
 

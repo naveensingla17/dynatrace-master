@@ -10,7 +10,7 @@
 
 ## Lab 1 – PetClinic on EC2 (RUM)
 
-Guide: [02. Dynatrace_lab1-RUM](../02.%20Dynatrace_lab1-RUM/README.md)
+Guide: [lab01-petclinic-ec2-apm-rum](../lab01-petclinic-ec2-apm-rum/README.md)
 
 ```text
    ┌──────────────┐
@@ -40,7 +40,7 @@ Guide: [02. Dynatrace_lab1-RUM](../02.%20Dynatrace_lab1-RUM/README.md)
 
 ## Lab 2 – easyTravel on Docker
 
-Guide: [03. Dynatrace_lab2-docker-application](../03.%20Dynatrace_lab2-docker-application/01.%20README.md)
+Guide: [lab02-easytravel-docker-synthetic](../lab02-easytravel-docker-synthetic/README.md)
 
 ```text
    ┌──────────────┐

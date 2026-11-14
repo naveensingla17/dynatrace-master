@@ -27,8 +27,8 @@ Complete these steps before you install OneAgent.
 
 | Item | Value |
 |------|-------|
-| Host | PetClinic VM from [02. Install_petclinic_application.md](02.%20Install_petclinic_application.md#11-create-a-vm) |
-| ActiveGate | Running in Network Zone `petclinic` ([01. Install_ActiveGate.md](01.%20Install_ActiveGate.md#2-install-environment-activegate-and-create-a-network-zone)) |
+| Host | PetClinic VM from [02-install-petclinic.md](02-install-petclinic.md#11-create-a-vm) |
+| ActiveGate | Running in Network Zone `petclinic` ([01-install-activegate.md](01-install-activegate.md#2-install-environment-activegate-and-create-a-network-zone)) |
 | User | `root` (the installer needs root privileges) |
 | Free space | At least 2 GB in `/opt` (the installer is ~270 MB) |
 
@@ -36,7 +36,7 @@ Complete these steps before you install OneAgent.
 
 **Bottom left → Profile → Account Management →** click the user profile **→ Platform Tokens → Create token →** select permissions **→ Generate token**
 
-> Use the scopes from [ActiveGate guide 1.4](01.%20Install_ActiveGate.md#14-generate-a-token). The token needs at least `fleet-management:oneagents:download`.
+> Use the scopes from [ActiveGate guide 1.4](01-install-activegate.md#14-generate-a-token). The token needs at least `fleet-management:oneagents:download`.
 
 ---
 
@@ -104,7 +104,7 @@ Complete these steps before you install OneAgent.
     | `--set-host-name=petclinic1` | Host name shown in Dynatrace |
     | `--set-host-property=env=demo` | Tag-like key/value property on the host |
 
-    Expected last line: `Dynatrace OneAgent has successfully connected to Dynatrace Cluster Node. You are all set.` The full output is in [98. outputs/oneagent_installation_output.md](98.%20outputs/oneagent_installation_output.md).
+    Expected last line: `Dynatrace OneAgent has successfully connected to Dynatrace Cluster Node. You are all set.` The full output is in [outputs/oneagent-install-output.md](outputs/oneagent-install-output.md).
 
 14. Enable, start and check the service:
 

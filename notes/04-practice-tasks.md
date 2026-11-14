@@ -2,9 +2,9 @@
 
 ## Tasks
 
-- [x] Set up Environment ActiveGate and Network Zone — [Lab 1](Dynatrace_lab1/01.%20Install_agent_gateway.md)
-- [x] Set up the PetClinic application for monitoring — [Lab 1](Dynatrace_lab1/02.%20install_petclinic_application.md)
-- [x] Set up OneAgent for application and OS monitoring — [Lab 1](Dynatrace_lab1/03.%20installOneagent.md)
+- [x] Set up Environment ActiveGate and Network Zone — [Lab 1](../lab01-petclinic-ec2-apm-rum/01-install-activegate.md)
+- [x] Set up the PetClinic application for monitoring — [Lab 1](../lab01-petclinic-ec2-apm-rum/02-install-petclinic.md)
+- [x] Set up OneAgent for application and OS monitoring — [Lab 1](../lab01-petclinic-ec2-apm-rum/03-install-oneagent.md)
 - [ ] Create a host group after OneAgent installation
 - [ ] Modify the Network Zone of OneAgent after installation
 - [ ] By default log monitoring is enabled, practice to disable while oneagent installation and observe

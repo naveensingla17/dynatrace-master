@@ -4,17 +4,17 @@ A hands-on lab that deploys the **easyTravel** sample application in Docker cont
 
 ## Lab steps
 
-The commands for each step are in [02. Install_docker.md](02.%20Install_docker.md).
+The commands for each step are in [01-install-docker-and-oneagent.md](01-install-docker-and-oneagent.md).
 
 | # | Step | Description | Guide section |
 |---|------|-------------|---------------|
-| 1 | **Set up the VM** | Install Git and Docker, and let `ec2-user` run Docker without `sudo` | [1. Default VM setup](02.%20Install_docker.md#1-default-vm-setup) |
-| 2 | **Install Docker Compose** | Install the Compose CLI plugin | [2. Install Docker Compose](02.%20Install_docker.md#2-install-docker-compose) |
-| 3 | **Deploy easyTravel** | Run easyTravel with `docker compose` | [3. Install easyTravel](02.%20Install_docker.md#3-install-easytravel) |
-| 4 | **Deploy Grafana** *(extra)* | Run Grafana as a second containerized app | [4. Install Grafana](02.%20Install_docker.md#4-install-grafana) |
-| 5 | **Install OneAgent** | Run OneAgent as a Docker container on the host | [6. Install OneAgent](02.%20Install_docker.md#6-install-oneagent-as-a-docker-container) |
+| 1 | **Set up the VM** | Install Git and Docker, and let `ec2-user` run Docker without `sudo` | [1. Default VM setup](01-install-docker-and-oneagent.md#1-default-vm-setup) |
+| 2 | **Install Docker Compose** | Install the Compose CLI plugin | [2. Install Docker Compose](01-install-docker-and-oneagent.md#2-install-docker-compose) |
+| 3 | **Deploy easyTravel** | Run easyTravel with `docker compose` | [3. Install easyTravel](01-install-docker-and-oneagent.md#3-install-easytravel) |
+| 4 | **Deploy Grafana** *(extra)* | Run Grafana as a second containerized app | [4. Install Grafana](01-install-docker-and-oneagent.md#4-install-grafana) |
+| 5 | **Install OneAgent** | Run OneAgent as a Docker container on the host | [6. Install OneAgent](01-install-docker-and-oneagent.md#6-install-oneagent-as-a-docker-container) |
 | 6 | **Check frontend vitals** | Check the easyTravel frontend in **Experience Vitals** | – |
-| 7 | **Enable user tag** | Identify users in sessions | [7. Enable user tag](02.%20Install_docker.md#7-enable-user-tag) |
+| 7 | **Enable user tag** | Identify users in sessions | [7. Enable user tag](01-install-docker-and-oneagent.md#7-enable-user-tag) |
 | 8 | **Conversion goal** | Define a goal, such as a completed booking, and track it | – |
 
 > **Note:** OneAgent only fully monitors processes that start after it is installed. If you install it after the containers are running, restart the easyTravel and Grafana containers.
