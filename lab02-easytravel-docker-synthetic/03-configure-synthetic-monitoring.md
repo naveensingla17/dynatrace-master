@@ -8,8 +8,10 @@ For the concepts (monitor types, locations, authentication), see [02-synthetic-m
    - [ ] [1.1 Create a VM for the ActiveGate](#11-create-a-vm-for-the-activegate)
    - [ ] [1.2 Install a Synthetic-enabled ActiveGate](#12-install-a-synthetic-enabled-activegate)
 2. [Post-installation tasks](#2-post-installation-tasks)
-   - [ ] [2.1 Configure the private location](#21-configure-the-private-location)
+   - [ ] [2.1 Configure the private location (prerequisite)](#21-configure-the-private-location-prerequisite)
    - [ ] [2.2 Configure an HTTP monitor](#22-configure-an-http-monitor)
+     - [ ] [2.2.1 Test the HTTP monitor](#221-test-the-http-monitor)
+   - [ ] [2.3 Configure a browser monitor](#23-configure-a-browser-monitor)
 3. [References](#references)
 
 ---
@@ -83,7 +85,9 @@ On the ActiveGate server:
 
 ## 2. Post-installation tasks
 
-### 2.1 Configure the private location
+### 2.1 Configure the private location (prerequisite)
+
+> **Prerequisite:** Create the private location before you configure any synthetic monitor that runs from it.
 
 1. Go to **Synthetic** and click **New private location** (top right)
 2. Select **Classic**
@@ -112,6 +116,8 @@ Instead, update Chromium manually in a planned maintenance window.
 
 ### 2.2 Configure an HTTP monitor
 
+> **Prerequisite:** [2.1 Configure the private location](#21-configure-the-private-location-prerequisite)
+
 1. Go to **Synthetic** → **Create a synthetic monitor** → **HTTP monitor**
 2. Enter the monitor name and tags, and select the existing frontend
 3. Add the HTTP request:
@@ -124,9 +130,42 @@ Instead, update Chromium manually in a planned maintenance window.
    | SSL | Certificate options, for example accept any SSL certificate |
    | Response status code verification | Default: **Fail** if the status code is `>=400` |
 
-4. Select the private location `SG-Punggol` and save the monitor.
+4. Set the frequency to **5 minutes** and select the private location `SG-Punggol`
+5. Choose the outage alert options and save the monitor
+
+> **Check that the app is reachable from the private location.** The monitor runs on the Synthetic ActiveGate, so run this on the ActiveGate server:
+>
+> ```bash
+> curl -I http://<EC2_PUBLIC_IP>:32770/
+> ```
+>
+> You should get `HTTP/1.1 200 OK`. If the request times out, allow the port in the easyTravel VM's security group.
 
 > For the status code rules you can enter, see [Response status code verification](02-synthetic-monitoring-concepts.md#153-response-status-code-verification). For what each code means, see [HTTP status codes](02-synthetic-monitoring-concepts.md#154-http-status-codes).
+
+#### 2.2.1 Test the HTTP monitor
+
+Run the monitor on demand to check that it works, instead of waiting for the next scheduled run:
+
+1. Go to **Synthetic** and select the monitor
+2. Click **View details** (top right) → **On-demand execution**
+3. Select the location `SG-Punggol` and click **Trigger now**
+
+To see the result of the last run in JSON format:
+
+1. Go to **Synthetic** and select the monitor
+2. Click **Analyze data** → **Last successful**
+
+### 2.3 Configure a browser monitor
+
+> **Prerequisite:** [2.1 Configure the private location](#21-configure-the-private-location-prerequisite)
+
+1. Go to **Synthetic** → **Create a synthetic monitor** → **Browser monitor**
+2. Enter the monitor name and the URL to check
+3. Add the conditions and a content validation rule, for example text that must appear on the page
+4. Keep the defaults for the other settings and save the monitor
+
+> Unlike an HTTP monitor, a browser monitor captures **screenshots** of the page. See [HTTP monitor vs browser-based monitor](02-synthetic-monitoring-concepts.md#11-http-monitor-vs-browser-based-monitor).
 
 ---
 

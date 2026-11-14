@@ -44,7 +44,7 @@ Dynatrace synthetic monitoring has three monitor types: **HTTP**, **browser-base
 |---|--------------|-----------------------|
 | 1 | Sends HTTP requests to a URL or API | Loads the app in a real browser |
 | 2 | Checks status code, response time and content | Single URL (one page) or clickpath (recorded user journey, e.g. search → book → pay) |
-| 3 | Output: response details, often in JSON | Output: screenshots of the page, plus load timings |
+| 3 | Output: response details, often in JSON. **No screenshots** | Output: **screenshots** of the page, plus load timings |
 | 4 | Best for APIs and endpoint availability | Best for page load performance and user journeys |
 
 > **Notes**
