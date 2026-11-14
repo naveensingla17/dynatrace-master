@@ -5,16 +5,16 @@ For the concepts (monitor types, locations, authentication), see [02-synthetic-m
 ## Checklist
 
 1. [Configure a private Synthetic location](#1-configure-a-private-synthetic-location)
-   - [ ] [1.1 Create a VM for the ActiveGate](#11-create-a-vm-for-the-activegate)
-   - [ ] [1.2 Install a Synthetic-enabled ActiveGate](#12-install-a-synthetic-enabled-activegate)
+   - [x] [1.1 Create a VM for the ActiveGate](#11-create-a-vm-for-the-activegate)
+   - [x] [1.2 Install a Synthetic-enabled ActiveGate](#12-install-a-synthetic-enabled-activegate)
 2. [Post-installation tasks](#2-post-installation-tasks)
-   - [ ] [2.1 Configure the private location (prerequisite)](#21-configure-the-private-location-prerequisite)
-   - [ ] [2.2 Configure an HTTP monitor](#22-configure-an-http-monitor)
-     - [ ] [2.2.1 Test the HTTP monitor](#221-test-the-http-monitor)
-   - [ ] [2.3 Configure a browser monitor](#23-configure-a-browser-monitor)
+   - [x] [2.1 Configure the private location (prerequisite)](#21-configure-the-private-location-prerequisite)
+   - [x] [2.2 Configure an HTTP monitor](#22-configure-an-http-monitor)
+     - [x] [2.2.1 Test the HTTP monitor](#221-test-the-http-monitor)
+   - [x] [2.3 Configure a browser monitor](#23-configure-a-browser-monitor)
 3. [Dynatrace synthetic and RUM pricing](#3-dynatrace-synthetic-and-rum-pricing)
-   - [ ] [3.1 HTTP monitor](#31-http-monitor)
-   - [ ] [3.2 Browser monitor](#32-browser-monitor)
+   - [x] [3.1 HTTP monitor](#31-http-monitor)
+   - [x] [3.2 Browser monitor](#32-browser-monitor)
 4. [References](#references)
 
 ---
