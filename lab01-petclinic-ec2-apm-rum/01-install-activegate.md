@@ -2,21 +2,27 @@
 
 ## Checklist
 
-- [x] [Update default security group](#1-update-default-security-group)
-- [x] [Create VMs](#2-create-vms)
-- [x] [Create demo instance](#3-create-demo-instance)
-- [x] [Generate token via Dynatrace app](#4-generate-token)
-- [x] [Install Environment ActiveGate & create Network Zone](#5-install-environment-activegate--create-network-zone)
-- [ ] 
+1. [Basic preparation and setup](#1-basic-preparation-and-setup)
+   - [x] [1.1 Update the default security group](#11-update-the-default-security-group)
+   - [x] [1.2 Create VMs](#12-create-vms)
+   - [x] [1.3 Create a demo instance](#13-create-a-demo-instance)
+   - [x] [1.4 Generate a token](#14-generate-a-token)
+2. [Install Environment ActiveGate and create a Network Zone](#2-install-environment-activegate-and-create-a-network-zone)
+   - [x] [2.1 In the Dynatrace console](#21-in-the-dynatrace-console)
+   - [x] [2.2 On the ActiveGate server](#22-on-the-activegate-server)
 
 ---
 
-## 1. Update default security group
+## 1. Basic preparation and setup
+
+Complete these steps before you install the ActiveGate.
+
+### 1.1 Update the default security group
 
 1. Go to **EC2 → Security Groups**
 2. Update the **default** security group as below
 
-**Inbound rules (8)** — all IPv4, Source `0.0.0.0/0`
+**Inbound rules (8):** All IPv4, source `0.0.0.0/0`
 
 | # | Type         | Protocol | Port range | Source    |
 |---|--------------|----------|------------|-----------|
@@ -29,13 +35,19 @@
 | 7 | MSSQL        | TCP      | 1433       | 0.0.0.0/0 |
 | 8 | PostgreSQL   | TCP      | 5432       | 0.0.0.0/0 |
 
-## 2. Create VMs
+### 1.2 Create VMs
 
-## 3. Create demo instance
+| Setting | Value |
+|---------|-------|
+| Instance type | `t2.medium` (2 vCPU, 4 GB RAM) |
+| Storage | 60 GB |
+| Image | Amazon Linux |
 
-Use a temporary email to register.
+### 1.3 Create a demo instance
 
-## 4. Generate token
+Register for a Dynatrace trial tenant. A temporary email is fine for registration.
+
+### 1.4 Generate a token
 
 1. **Bottom left → Profile → Account Management →** click the user profile (top right) **→ Platform Tokens → Create token →** select permissions **→ Generate token**
 2. There is no PaaS token option in the new-generation Dynatrace.
@@ -118,17 +130,19 @@ storage:system:read
 
 4. To automate token generation:
 
-```bash
-curl -X POST "https://nes80740.live.dynatrace.com/api/v2/apiTokens" \
-  -H "accept: application/json; charset=utf-8" \
-  -H "Content-Type: application/json; charset=utf-8" \
-  -H "Authorization: Api-Token <YOUR_DYNATRACE_API_TOKEN>" \
-  -d '{"scopes":["InstallerDownload","SupportAlert"],"name":"agent-installation"}'
-```
+   ```bash
+   curl -X POST "https://nes80740.live.dynatrace.com/api/v2/apiTokens" \
+     -H "accept: application/json; charset=utf-8" \
+     -H "Content-Type: application/json; charset=utf-8" \
+     -H "Authorization: Api-Token <YOUR_DYNATRACE_API_TOKEN>" \
+     -d '{"scopes":["InstallerDownload","SupportAlert"],"name":"agent-installation"}'
+   ```
 
-## 5. Install Environment ActiveGate & create Network Zone
+---
 
-### In the Dynatrace console
+## 2. Install Environment ActiveGate and create a Network Zone
+
+### 2.1 In the Dynatrace console
 
 1. Go to **Discovery & Coverage**
 2. Click **Install** (right side)
@@ -137,7 +151,7 @@ curl -X POST "https://nes80740.live.dynatrace.com/api/v2/apiTokens" \
 5. Enter a Network Zone name (e.g. `petclinic`) and click **+** to create it
 6. Similarly, create an ActiveGate Group named `ag01`
 
-### On the ActiveGate server
+### 2.2 On the ActiveGate server
 
 7. Download the installer:
 
@@ -188,7 +202,7 @@ curl -X POST "https://nes80740.live.dynatrace.com/api/v2/apiTokens" \
 
 14. To view the Network Zone: **Settings → Fleet Management**
 
-### Reference
+### 2.3 Reference
 
 | Item | Command / Path |
 |------|----------------|

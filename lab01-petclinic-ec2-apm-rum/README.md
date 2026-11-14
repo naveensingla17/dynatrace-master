@@ -32,7 +32,7 @@ A hands-on lab that sets up Dynatrace monitoring for a sample Java app running o
 
 - An AWS account with permission to create EC2 instances and edit security groups
 - A Dynatrace trial tenant (a temporary email is fine for registration)
-- A Dynatrace **Platform Token** with the scopes listed in [01. Install_agent_gateway.md](01.%20Install_agent_gateway.md#4-generate-token)
+- A Dynatrace **Platform Token** with the scopes listed in [01. Install_ActiveGate.md](01.%20Install_ActiveGate.md#14-generate-a-token)
 - An SSH key pair (`.pem`) for the EC2 instances
 
 ## Lab steps
@@ -41,7 +41,7 @@ Follow the guides in this order:
 
 | # | Guide | What it covers |
 |---|---|---|
-| 1 | [01. Install_agent_gateway.md](01.%20Install_agent_gateway.md) | Security group rules, VMs, token creation, ActiveGate and Network Zone |
+| 1 | [01. Install_ActiveGate.md](01.%20Install_ActiveGate.md) | Security group rules, VMs, token creation, ActiveGate and Network Zone |
 | 2 | [02. install_petclinic_application.md](02.%20install_petclinic_application.md) | Java 17, Maven, build PetClinic, run it as a `systemd` service |
 | 3 | [03. installOneagent.md](03.%20installOneagent.md) | Install OneAgent on the app host and disable auto-updates |
 | 4 | [04. Explore_UI.md](04.%20Explore_UI.md) | APM (services, backtrace), RUM / Experience Vitals, session replay, Web Vitals, Apdex, synthetic users, conversion goals |
@@ -80,7 +80,7 @@ Make changes in the PetClinic app (add owners and pets, browse pages) and watch 
 ```text
 Dynatrace_lab1/
 ├── README.md
-├── 01. Install_agent_gateway.md          # ActiveGate + Network Zone
+├── 01. Install_ActiveGate.md              # ActiveGate + Network Zone
 ├── 02. install_petclinic_application.md  # PetClinic app setup
 ├── 03. installOneagent.md                # OneAgent install
 ├── 04. Explore_UI.md                     # APM, RUM, synthetic monitoring
