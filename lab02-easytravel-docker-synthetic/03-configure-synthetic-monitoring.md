@@ -12,7 +12,10 @@ For the concepts (monitor types, locations, authentication), see [02-synthetic-m
    - [ ] [2.2 Configure an HTTP monitor](#22-configure-an-http-monitor)
      - [ ] [2.2.1 Test the HTTP monitor](#221-test-the-http-monitor)
    - [ ] [2.3 Configure a browser monitor](#23-configure-a-browser-monitor)
-3. [References](#references)
+3. [Dynatrace synthetic and RUM pricing](#3-dynatrace-synthetic-and-rum-pricing)
+   - [ ] [3.1 HTTP monitor](#31-http-monitor)
+   - [ ] [3.2 Browser monitor](#32-browser-monitor)
+4. [References](#references)
 
 ---
 
@@ -169,7 +172,57 @@ To see the result of the last run in JSON format:
 
 ---
 
+## 3. Dynatrace synthetic and RUM pricing
+
+Synthetic monitoring and RUM are billed **pay as you go**: you pay for every HTTP request or browser action a monitor runs, and for every real user session. The UI doesn't show the calculation, but you can see how much you've used:
+
+**Account Management** (bottom left) → **Subscription**
+
+Official rate card:
+
+| Capability | Billed per | Price | Price per unit |
+|------------|-----------|-------|----------------|
+| HTTP monitor | Synthetic request | 1 USD per 1,000 requests | 0.001 USD |
+| Browser monitor | Synthetic action | 4.5 USD per 1,000 actions | 0.0045 USD |
+| Real User Monitoring (RUM) | Session | 2.25 USD per 1,000 sessions | 0.00225 USD |
+| RUM with Session Replay | Session | 4.5 USD per 1,000 sessions | 0.0045 USD |
+
+Source: [Dynatrace pricing](https://www.dynatrace.com/pricing/)
+
+Cost formula:
+
+```text
+cost = URLs × locations × executions per hour × hours × price per request (or action)
+```
+
+### 3.1 HTTP monitor
+
+Example (`UC_01`): 1 URL, 4 locations, runs every 5 minutes (12 times an hour), at **0.001 USD per request**.
+
+| Period | Requests | Cost (USD) |
+|--------|----------|------------|
+| 1 hour | 1 × 4 × 12 = **48** | 48 × 0.001 = **0.048** |
+| 1 day | 48 × 24 = **1,152** | **1.15** |
+| 1 year | 1,152 × 365 = **420,480** | **420.48** |
+
+> Cost grows linearly with each factor. Running every 15 minutes instead of 5, or from 2 locations instead of 4, cuts the cost to a third or a half.
+
+### 3.2 Browser monitor
+
+Same example (`UC_01`) as a single-URL browser monitor (1 page load = 1 action per run), at **0.0045 USD per action**.
+
+| Period | Actions | Cost (USD) |
+|--------|---------|------------|
+| 1 hour | 1 × 4 × 12 = **48** | 48 × 0.0045 = **0.216** |
+| 1 day | 48 × 24 = **1,152** | **5.18** |
+| 1 year | 1,152 × 365 = **420,480** | **1,892.16** |
+
+> A clickpath monitor is billed for **every action** in the recorded journey. A 5-step clickpath costs 5× the single-URL example: about **9,460.80 USD per year**.
+
+---
+
 ## References
 
 - [Manage private Synthetic locations – Browser autoupdate](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/private-synthetic-locations/manage-private-synthetic-locations#:~:text=Data%20Explorer%20Classic-,Browser%20autoupdate,-You%20can%20Enable)
 - [Configure HTTP monitors in Classic](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/http-monitors-classic/configure-http-monitors-classic)
+- [Dynatrace pricing](https://www.dynatrace.com/pricing/)

@@ -134,7 +134,7 @@ Then terminate the EC2 instances in AWS.
 
 ## Related notes
 
-- [Interview questions](../notes/06-interview-questions.md)
+- [Interview questions](../notes/99-interview-questions.md)
 - [Gen3 vs Classic differences](../notes/02-gen3-vs-classic.md)
 - [Architecture](../notes/01-architecture.md)
 - [Knowledge notes](../notes/03-knowledge-notes.md)
