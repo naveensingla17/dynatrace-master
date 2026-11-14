@@ -65,11 +65,13 @@ lab02-easytravel-docker-synthetic/
 | 7 | **Enable user tag** | Identify users in sessions | [7. Enable user tag](01-install-docker-and-oneagent.md#7-enable-user-tag) |
 | 8 | **Conversion goal** | Define a goal, such as a completed booking, and track it | – |
 | 9 | **Learn synthetic concepts** | Monitor types, public vs private locations, status code rules | [Synthetic monitoring concepts](02-synthetic-monitoring-concepts.md) |
-| 10 | **Install a Synthetic ActiveGate** | Create a VM and install a Synthetic-enabled ActiveGate | [1. Configure a private Synthetic location](03-configure-synthetic-monitoring.md#1-configure-a-private-synthetic-location) |
-| 11 | **Create the private location** | Create `SG-Punggol` on the Synthetic ActiveGate | [2.1 Configure the private location](03-configure-synthetic-monitoring.md#21-configure-the-private-location-prerequisite) |
-| 12 | **Create an HTTP monitor** | Check easyTravel from the private location, then test it on demand | [2.2 Configure an HTTP monitor](03-configure-synthetic-monitoring.md#22-configure-an-http-monitor) |
-| 13 | **Create a browser monitor** | Load easyTravel in a real browser and validate the page content | [2.3 Configure a browser monitor](03-configure-synthetic-monitoring.md#23-configure-a-browser-monitor) |
-| 14 | **Estimate the cost** | Calculate synthetic and RUM cost from the rate card | [3. Pricing](03-configure-synthetic-monitoring.md#3-dynatrace-synthetic-and-rum-pricing) |
+| 10 | **Install a Synthetic ActiveGate** | Create a VM and install a Synthetic-enabled ActiveGate | [1. Install a Synthetic-enabled ActiveGate](03-configure-synthetic-monitoring.md#1-install-a-synthetic-enabled-activegate) |
+| 11 | **Create the private location** | Create `SG-Punggol` on the Synthetic ActiveGate | [2. Configure the private location](03-configure-synthetic-monitoring.md#2-configure-the-private-location) |
+| 12 | **Create an HTTP monitor** | Check easyTravel from the private location, then test it on demand | [3. Configure an HTTP monitor](03-configure-synthetic-monitoring.md#3-configure-an-http-monitor) |
+| 13 | **Monitor a POST API** | Send a `POST` with a JSON body from an HTTP monitor | [3.4 Monitor a POST API](03-configure-synthetic-monitoring.md#34-monitor-a-post-api) |
+| 14 | **Create a browser monitor** | Load easyTravel in a real browser and validate the page content | [4. Configure a browser monitor](03-configure-synthetic-monitoring.md#4-configure-a-browser-monitor) |
+| 15 | **Record a clickpath** | Record a user journey with the Synthetic Recorder and run it as a browser monitor | [4.2 Clickpath with the Synthetic Recorder](03-configure-synthetic-monitoring.md#42-clickpath-with-the-synthetic-recorder) |
+| 16 | **Estimate the cost** | Calculate synthetic and RUM cost from the rate card | [5. Pricing](03-configure-synthetic-monitoring.md#5-synthetic-and-rum-pricing) |
 
 > **Note:** OneAgent only fully monitors processes that start after it is installed. If you install it after the containers are running, restart the easyTravel and Grafana containers.
 
@@ -104,7 +106,9 @@ lab02-easytravel-docker-synthetic/
 - [x] Install a Synthetic-enabled ActiveGate
 - [x] Create the private location `SG-Punggol`
 - [x] Create and test an HTTP monitor
+- [x] Monitor a POST API
 - [x] Create a browser monitor
+- [x] Record a clickpath with the Synthetic Recorder
 - [x] Estimate the synthetic and RUM cost
 
 ## Security note
