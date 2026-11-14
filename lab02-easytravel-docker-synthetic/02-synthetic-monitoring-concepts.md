@@ -11,75 +11,48 @@ Synthetic monitoring is **proactive** monitoring. Dynatrace runs scripted checks
 
 > Real User Monitoring (RUM) shows what real users experienced. Synthetic monitoring tests the app on a schedule, so you can find problems before users do.
 
+
 ## Contents
 
-This document has two main parts.
+This document has three main parts.
 
 1. [Monitor types](#1-monitor-types)
-   - 1.1 [HTTP monitor vs browser-based monitor](#11-http-monitor-vs-browser-based-monitor)
-   - 1.2 [Network availability monitor](#12-network-availability-monitor)
-   - 1.3 [Application types](#13-application-types)
-   - 1.4 [Locations](#14-locations)
-   - 1.5 [API monitoring](#15-api-monitoring)
-     - 1.5.1 [HTTP methods](#151-http-methods)
-     - 1.5.2 [Dynatrace APIs](#152-dynatrace-apis)
-     - 1.5.3 [Response status code verification](#153-response-status-code-verification)
-     - 1.5.4 [HTTP status codes](#154-http-status-codes)
-2. [Authentication](#2-authentication)
-   - 2.1 [Requirements](#21-requirements)
-   - 2.2 [Limitations](#22-limitations)
-   - 2.3 [Supported authentication types](#23-supported-authentication-types)
-     - 2.3.1 [Kerberos flow](#231-kerberos-flow)
-     - 2.3.2 [Kerberos in Dynatrace synthetic monitors](#232-kerberos-in-dynatrace-synthetic-monitors)
+   - 1.1 [HTTP monitor](#11-http-monitor)
+     - 1.1.1 [HTTP methods](#111-http-methods)
+     - 1.1.2 [Dynatrace APIs](#112-dynatrace-apis)
+     - 1.1.3 [Response status code verification](#113-response-status-code-verification)
+     - 1.1.4 [HTTP status codes](#114-http-status-codes)
+   - 1.2 [Browser monitor](#12-browser-monitor)
+   - 1.3 [Network availability monitor](#13-network-availability-monitor)
+2. [Common concepts](#2-common-concepts)
+   - 2.1 [Application types](#21-application-types)
+   - 2.2 [Locations](#22-locations)
+3. [Authentication](#3-authentication)
+   - 3.1 [Requirements](#31-requirements)
+   - 3.2 [Limitations](#32-limitations)
+   - 3.3 [Supported authentication types](#33-supported-authentication-types)
+     - 3.3.1 [Kerberos flow](#331-kerberos-flow)
+     - 3.3.2 [Kerberos in Dynatrace synthetic monitors](#332-kerberos-in-dynatrace-synthetic-monitors)
 
 ---
 
 ## 1. Monitor types
 
-Dynatrace synthetic monitoring has three monitor types: **HTTP**, **browser-based** and **network availability**.
+Dynatrace synthetic monitoring has exactly three monitor types:
 
-### 1.1 HTTP monitor vs browser-based monitor
+| # | Monitor type | What it does | Output | Best for |
+|---|--------------|--------------|--------|----------|
+| 1 | **HTTP** | Sends HTTP requests to a URL or API and checks status code, response time and content | Response details, often in JSON. **No screenshots** | APIs and endpoint availability |
+| 2 | **Browser** | Loads the app in a real browser, as a single URL or a clickpath | **Screenshots** of the page, plus load timings | Page load performance and user journeys |
+| 3 | **Network availability** | Checks basic network reachability of a host (ICMP, DNS, TCP) | Reachability and resolution results | Host, DNS and port availability |
 
-| # | HTTP monitor | Browser-based monitor |
-|---|--------------|-----------------------|
-| 1 | Sends HTTP requests to a URL or API | Loads the app in a real browser |
-| 2 | Checks status code, response time and content | Single URL (one page) or clickpath (recorded user journey, e.g. search → book → pay) |
-| 3 | Output: response details, often in JSON. **No screenshots** | Output: **screenshots** of the page, plus load timings |
-| 4 | Best for APIs and endpoint availability | Best for page load performance and user journeys |
+### 1.1 HTTP monitor
 
-> **Notes**
->
-> - Browser-based monitoring is also known as multi-API monitoring.
-> - Browser-based monitors use JavaScript, but you don't have to write it. The **Synthetic Recorder** records the transaction for you.
+Sends HTTP requests to a URL or API and checks the status code, response time and content. There are no screenshots; the output is the response details, often in JSON.
 
-### 1.2 Network availability monitor
+This is the monitor type used for **API monitoring**: it can call APIs with authentication and any HTTP method.
 
-Checks basic network reachability of a host:
-
-| # | Check | What it tests |
-|---|-------|---------------|
-| 1 | **ICMP / Ping** | Whether the host is reachable |
-| 2 | **DNS** | Whether the domain name resolves |
-| 3 | **TCP / port** | Whether a specific port on the host is open |
-
-### 1.3 Application types
-
-1. **Internal applications:** Reachable only inside your network
-2. **Public-facing applications:** Reachable from the internet
-
-### 1.4 Locations
-
-| # | Public location | Private location |
-|---|-----------------|------------------|
-| 1 | Set up by Dynatrace | Set up by the user, i.e. an Environment ActiveGate |
-| 2 | Runs from Dynatrace locations around the world | Runs on your own Synthetic-enabled ActiveGate |
-| 3 | Tests public-facing apps (reachable from the internet) | Tests internal apps (reachable only inside your network) |
-
-### 1.5 API monitoring
-
-An HTTP monitor can call APIs with authentication and any HTTP method.
-
-#### 1.5.1 HTTP methods
+#### 1.1.1 HTTP methods
 
 | # | Method | Purpose |
 |---|--------|---------|
@@ -91,13 +64,13 @@ An HTTP monitor can call APIs with authentication and any HTTP method.
 | 6 | `HEAD` | Retrieve only the response headers |
 | 7 | `OPTIONS` | Show the communication options (allowed methods) for a URL |
 
-#### 1.5.2 Dynatrace APIs
+#### 1.1.2 Dynatrace APIs
 
 Dynatrace also provides its own APIs. You can browse and try them in the Swagger UI of your tenant:
 
 <https://nes80740.apps.dynatrace.com/platform/swagger-ui/index.html>
 
-#### 1.5.3 Response status code verification
+#### 1.1.3 Response status code verification
 
 In an HTTP monitor, **Response status code verification** decides whether the monitor passes or fails based on the HTTP status code it gets back.
 
@@ -113,7 +86,7 @@ By default, the monitor **fails** on any `4xx` or `5xx` response and **passes** 
 
 > **Follow redirects** is on by default (up to 10 redirects). Turn it off to check the status code of the redirect itself, for example `301`.
 
-#### 1.5.4 HTTP status codes
+#### 1.1.4 HTTP status codes
 
 | Class | Meaning |
 |-------|---------|
@@ -152,22 +125,65 @@ Common codes:
 | `503` | Service Unavailable | The server is down for maintenance or overloaded (temporary) |
 | `504` | Gateway Timeout | A gateway or proxy got no response from the upstream server in time |
 
+### 1.2 Browser monitor
+
+Loads the app in a real browser and measures page load performance. Output includes **screenshots** of the page, plus load timings.
+
+| # | Kind | What it covers |
+|---|------|----------------|
+| 1 | **Single URL** | One page |
+| 2 | **Clickpath** | A recorded user journey, e.g. search → book → pay |
+
+> **Notes**
+>
+> - Browser-based monitoring is also known as multi-API monitoring.
+> - Browser monitors use JavaScript, but you don't have to write it. The **Synthetic Recorder** records the transaction for you.
+
+### 1.3 Network availability monitor
+
+Checks basic network reachability of a host:
+
+| # | Check | What it tests |
+|---|-------|---------------|
+| 1 | **ICMP / Ping** | Whether the host is reachable |
+| 2 | **DNS** | Whether the domain name resolves |
+| 3 | **TCP / port** | Whether a specific port on the host is open |
+
 ---
 
-## 2. Authentication
+## 2. Common concepts
 
-### 2.1 Requirements
+These concepts apply to all three monitor types.
+
+### 2.1 Application types
+
+1. **Internal applications:** Reachable only inside your network
+2. **Public-facing applications:** Reachable from the internet
+
+### 2.2 Locations
+
+| # | Public location | Private location |
+|---|-----------------|------------------|
+| 1 | Set up by Dynatrace | Set up by the user, i.e. an Environment ActiveGate |
+| 2 | Runs from Dynatrace locations around the world | Runs on your own Synthetic-enabled ActiveGate |
+| 3 | Tests public-facing apps (reachable from the internet) | Tests internal apps (reachable only inside your network) |
+
+---
+
+## 3. Authentication
+
+### 3.1 Requirements
 
 To monitor an application that needs a login:
 
 1. **Create a service account:** A dedicated login for the synthetic monitor to use
 2. **Set the password expiry:** Use a password that never expires, or one that expires after one year, so the monitor doesn't start failing when the password expires
 
-### 2.2 Limitations
+### 3.2 Limitations
 
 > **MFA / SSO:** If the application login uses MFA or SSO, none of the synthetic monitor types supports it.
 
-### 2.3 Supported authentication types
+### 3.3 Supported authentication types
 
 Dynatrace synthetic monitors support these authentication types. They are three **separate** types; NTLM and Kerberos are not part of Basic.
 
@@ -181,7 +197,7 @@ Dynatrace synthetic monitors support these authentication types. They are three 
 >
 > HTTP monitors also support **OAuth 2.0** and **certificate-based** authentication.
 
-#### 2.3.1 Kerberos flow
+#### 3.3.1 Kerberos flow
 
 Kerberos involves three parties: the **client** (the user, or the synthetic monitor), the **target service** (the application), and the **Key Distribution Center (KDC)**. The KDC runs on every domain controller and contains two services: the **Authentication Service (AS)** and the **Ticket-Granting Service (TGS)**.
 
@@ -226,7 +242,7 @@ User request ──▶ Authentication Service (AS) ──▶ Ticket-Granting Ser
 | 2 | **Get a service ticket** | TGS-REQ / TGS-REP | The client presents the TGT to the Ticket-Granting Service and asks for a **service ticket** for the specific application. |
 | 3 | **Access the service** | AP-REQ / AP-REP | The client presents the service ticket directly to the target service, which grants access. The password is never sent to the service. |
 
-#### 2.3.2 Kerberos in Dynatrace synthetic monitors
+#### 3.3.2 Kerberos in Dynatrace synthetic monitors
 
 | # | Item | Details |
 |---|------|---------|
