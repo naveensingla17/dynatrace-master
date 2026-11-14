@@ -17,9 +17,9 @@ A hands-on lab that deploys the **EasyTravel** sample application in Docker and 
 
 ## Checklist
 
-- [ ] Set up the EasyTravel application
-- [ ] Deploy EasyTravel on Docker
-- [ ] Install OneAgent on the Docker host
-- [ ] Check frontend vitals in Experience Vitals
+- [x] Set up the EasyTravel application
+- [x] Deploy EasyTravel on Docker
+- [x] Install OneAgent on the Docker host
+- [x] Check frontend vitals in Experience Vitals
 - [ ] Enable user tagging
 - [ ] Create and track a conversion goal

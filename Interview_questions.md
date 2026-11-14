@@ -12,6 +12,12 @@
 | [Q6](#q6-what-are-request-outliers-and-how-do-you-analyze-them) | Request outliers |
 | [Q7](#q7-what-can-you-do-with-distributed-tracing-multidimensional-analysis-in-classic) | Distributed tracing (multidimensional analysis) |
 | [Q8](#q8-what-are-conversion-goals-and-how-do-you-create-one) | Conversion goals |
+| [Q9](#q9-how-do-you-configure-a-custom-error-code) | Custom error codes |
+| [Q10](#q10-how-can-you-check-that-the-rum-javascript-is-injected-into-the-application) | Checking RUM injection |
+| [Q11](#q11-there-is-no-application-data-in-experience-vitals-and-no-traces-how-do-you-troubleshoot) | Troubleshooting missing RUM data and traces |
+| [Q12](#q12-how-can-you-update-the-application-url-of-a-frontend) | Updating a frontend's application URL |
+| [Q13](#q13-how-do-you-enable-or-disable-rum-monitoring) | Enabling / disabling RUM |
+| [Q14](#q14-do-we-need-to-restart-the-application-after-adding-its-url-to-a-frontend) | Restart after adding a frontend URL |
 
 ---
 
@@ -96,5 +102,41 @@ From the **Database queries** section you can run a backtrace to find the parent
 
 **Path:** **Settings → select the frontend application → Process and contextualize → Conversion goals (Classic)**
 
-## 9. How to configure custom error code
-**Path:** **Settings → Process and contextualize --> Process Group → Custom monitoring rules**
+---
+
+## Q9. How do you configure a custom error code?
+
+**Path:** **Settings → Process and contextualize → Process Group → Custom monitoring rules**
+
+---
+
+## Q10. How can you check that the RUM JavaScript is injected into the application?
+
+**Answer:** Open the application in the browser, open **Developer Tools (Inspect) → Sources**, and look for **`ruxitagent`**. If it is there, the RUM JavaScript has been injected by OneAgent.
+
+---
+
+## Q11. There is no application data in Experience Vitals and no traces. How do you troubleshoot?
+
+**Answer:**
+
+1. Check the application URL first: has anything changed?
+2. _TODO_
+
+---
+
+## Q12. How can you update the application URL of a frontend?
+
+**Path:** **Settings → Environment → Collect and capture → Real User Monitoring → Detection**, then edit the URL.
+
+---
+
+## Q13. How do you enable or disable RUM monitoring?
+
+**Path:** **Settings → select the application (e.g. petclinic) → Collect and capture → Enablement and cost control**
+
+---
+
+## Q14. Do we need to restart the application after adding its URL to a frontend?
+
+**Answer:** No.
