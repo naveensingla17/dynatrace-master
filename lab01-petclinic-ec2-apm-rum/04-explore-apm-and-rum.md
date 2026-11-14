@@ -68,7 +68,7 @@ Open the **Service map** to see the service flow: which services call each other
 1. Use the PetClinic website: add owners and pets, and browse a few pages
 2. Open the session replay:
 
-   **Experience Vitals → petclinic → Open with Users & Sessions →** click a PetClinic user session **→ Replay**
+   **Experience Vitals → petclinic → Open with Users & Sessions →** click a PetClinic user session **→ Session Replay**
 
 > If no sessions are shown, increase the time range.
 
@@ -190,7 +190,7 @@ Apdex = (70 + 20 × 0.5) / 100 = 0.80   → Fair
 | What | Path |
 |------|------|
 | Services | **Search → Services → Tomcat** |
-| Session replay | **Experience Vitals → petclinic → Open with Users & Sessions → session → Replay** |
+| Session replay | **Experience Vitals → petclinic → Open with Users & Sessions → session → Session Replay** |
 | User sessions dashboard | **Dashboards → User Sessions Overview** |
 | Conversion goals | **Settings → frontend app → Process and contextualize → Conversion goals** |
 

@@ -10,6 +10,7 @@
 2. [Install Environment ActiveGate and create a Network Zone](#2-install-environment-activegate-and-create-a-network-zone)
    - [x] [2.1 In the Dynatrace console](#21-in-the-dynatrace-console)
    - [x] [2.2 On the ActiveGate server](#22-on-the-activegate-server)
+3. [Cleanup](#3-cleanup)
 
 ---
 
@@ -210,3 +211,13 @@ storage:system:read
 | Config properties | `/var/lib/dynatrace/gateway/config/config.properties` |
 | Connected cluster | `/var/lib/dynatrace/gateway/config/cluster.properties` |
 | Install log | `/var/log/dynatrace/gateway/dynatracegateway-install_<timestamp>.log` |
+
+## 3. Cleanup
+
+When you finish the lab, uninstall the ActiveGate on the ActiveGate host:
+
+```bash
+/opt/dynatrace/gateway/uninstall.sh
+```
+
+Then terminate the ActiveGate EC2 instance in AWS.

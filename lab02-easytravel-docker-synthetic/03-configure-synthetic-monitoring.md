@@ -144,7 +144,7 @@ Instead, update Chromium manually in a planned maintenance window.
 >
 > You should get `HTTP/1.1 200 OK`. If the request times out, allow the port in the easyTravel VM's security group.
 
-> For the status code rules you can enter, see [Response status code verification](02-synthetic-monitoring-concepts.md#153-response-status-code-verification). For what each code means, see [HTTP status codes](02-synthetic-monitoring-concepts.md#154-http-status-codes).
+> For the status code rules you can enter, see [Response status code verification](02-synthetic-monitoring-concepts.md#113-response-status-code-verification). For what each code means, see [HTTP status codes](02-synthetic-monitoring-concepts.md#114-http-status-codes).
 
 #### 2.2.1 Test the HTTP monitor
 
@@ -168,7 +168,7 @@ To see the result of the last run in JSON format:
 3. Add the conditions and a content validation rule, for example text that must appear on the page
 4. Keep the defaults for the other settings and save the monitor
 
-> Unlike an HTTP monitor, a browser monitor captures **screenshots** of the page. See [HTTP monitor vs browser-based monitor](02-synthetic-monitoring-concepts.md#11-http-monitor-vs-browser-based-monitor).
+> Unlike an HTTP monitor, a browser monitor captures **screenshots** of the page. See [Monitor types](02-synthetic-monitoring-concepts.md#1-monitor-types).
 
 ---
 

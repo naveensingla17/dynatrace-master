@@ -16,6 +16,7 @@ Install OneAgent in **full-stack** mode on the PetClinic host. Its traffic goes 
    - [x] [3.3 Restart the application](#33-restart-the-application)
    - [x] [3.4 Verify the installation](#34-verify-the-installation)
    - [x] [3.5 Reference](#35-reference)
+4. [Cleanup](#4-cleanup)
 
 ---
 
@@ -129,7 +130,7 @@ Complete these steps before you install OneAgent.
 
 Always disable OneAgent automatic updates in the lab, so the version doesn't change between sessions.
 
-1. Go to **Settings → Fleet Management → OneAgent version update**
+1. Go to **Settings → Fleet management → OneAgent version and updates**
 2. Select **Auto-update disabled**
 3. Click **Save**
 
@@ -183,3 +184,13 @@ sudo systemctl status petclinic.service
 | Install log | `/var/log/dynatrace/oneagent/installer/installation_<id>.log` |
 | Agent logs | `/var/log/dynatrace/oneagent/` |
 | Uninstall script | `/opt/dynatrace/oneagent/agent/uninstall.sh` |
+
+## 4. Cleanup
+
+When you finish the lab, uninstall OneAgent on the PetClinic host:
+
+```bash
+/opt/dynatrace/oneagent/agent/uninstall.sh
+```
+
+Then terminate the PetClinic EC2 instance in AWS.

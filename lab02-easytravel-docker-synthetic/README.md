@@ -2,6 +2,36 @@
 
 A hands-on lab that deploys the **easyTravel** sample application in Docker containers and monitors it with Dynatrace OneAgent, which also runs as a container. It then adds **synthetic monitoring** from a private location: HTTP and browser monitors that check the app on a schedule.
 
+## Architecture
+
+```text
+┌────────────────────────────────┐                     ┌────────────────────┐
+│ EC2 VM-1: Docker host          │   OneAgent data     │ Dynatrace SaaS     │
+│                                │───────────────────▶ │                    │
+│ easyTravel   :32770/32771      │                     │  Tenant            │
+│ Grafana      :3000             │                     │                    │
+│ OneAgent (container)           │                     │                    │
+└────────────────────────────────┘                     └────────────────────┘
+                 ▲                                                ▲
+                 │ HTTP and browser checks                        │ monitor results
+┌────────────────┴───────────────┐                                │
+│ EC2 VM-2: Synthetic ActiveGate │────────────────────────────────┘
+│ group: pvt01                   │
+│ private location: SG-Punggol   │
+└────────────────────────────────┘
+          └──────────── Network Zone: petclinic ────────────┘
+```
+
+| # | Setting | Value |
+|---|---------|-------|
+| 1 | Network Zone | `petclinic` |
+| 2 | Synthetic ActiveGate group | `pvt01` |
+| 3 | Synthetic ActiveGate VM | `t2.medium` (2 vCPU, 4 GB RAM), 60 GB, Amazon Linux |
+| 4 | Private location | `SG-Punggol` (Singapore) |
+| 5 | easyTravel ports | `32770`, `32771` (dynamic, check `docker ps`) |
+| 6 | Grafana port | `3000` |
+| 7 | Monitor frequency | Every 5 minutes |
+
 ## Guides
 
 Follow the guides in this order:
@@ -11,6 +41,16 @@ Follow the guides in this order:
 | 1 | [01-install-docker-and-oneagent.md](01-install-docker-and-oneagent.md) | Docker, Docker Compose, easyTravel, Grafana, OneAgent as a container, user tag |
 | 2 | [02-synthetic-monitoring-concepts.md](02-synthetic-monitoring-concepts.md) | Monitor types, locations, API monitoring, HTTP status codes, authentication |
 | 3 | [03-configure-synthetic-monitoring.md](03-configure-synthetic-monitoring.md) | Private Synthetic location, HTTP and browser monitors, synthetic and RUM pricing |
+
+## Repository structure
+
+```text
+lab02-easytravel-docker-synthetic/
+├── README.md
+├── 01-install-docker-and-oneagent.md      # Docker, easyTravel, Grafana, OneAgent container, user tag
+├── 02-synthetic-monitoring-concepts.md    # Monitor types, locations, status codes, authentication
+└── 03-configure-synthetic-monitoring.md   # Private location, HTTP and browser monitors, pricing
+```
 
 ## Lab steps
 
@@ -33,6 +73,19 @@ Follow the guides in this order:
 
 > **Note:** OneAgent only fully monitors processes that start after it is installed. If you install it after the containers are running, restart the easyTravel and Grafana containers.
 
+## Quick navigation in Dynatrace
+
+| # | What | Path |
+|---|------|------|
+| 1 | Frontend vitals | **Experience Vitals** |
+| 2 | User tag | **Settings → application → User tag (Classic) → Capture properties → Capture event properties** |
+| 3 | Install a Synthetic ActiveGate | **Discovery & Coverage → Install → Install ActiveGate → Synthetic** |
+| 4 | Private location | **Synthetic → New private location → Classic** |
+| 5 | Create a monitor | **Synthetic → Create a synthetic monitor → HTTP monitor / Browser monitor** |
+| 6 | Run a monitor on demand | **Synthetic → monitor → View details → On-demand execution → Trigger now** |
+| 7 | Last result (JSON) | **Synthetic → monitor → Analyze data → Last successful** |
+| 8 | Usage and cost | **Account Management → Subscription** |
+
 ## Checklist
 
 **Docker and OneAgent**
@@ -48,12 +101,23 @@ Follow the guides in this order:
 
 **Synthetic monitoring**
 
-- [ ] Install a Synthetic-enabled ActiveGate
-- [ ] Create the private location `SG-Punggol`
-- [ ] Create and test an HTTP monitor
-- [ ] Create a browser monitor
-- [ ] Estimate the synthetic and RUM cost
+- [x] Install a Synthetic-enabled ActiveGate
+- [x] Create the private location `SG-Punggol`
+- [x] Create and test an HTTP monitor
+- [x] Create a browser monitor
+- [x] Estimate the synthetic and RUM cost
 
 ## Security note
 
 Never commit Dynatrace tokens. Set them as environment variables (for example `DT_INSTALLER_TOKEN`) on the host, and use placeholders such as `<YOUR_TENANT_TOKEN>` in `connection.properties` examples, as shown in the guides.
+
+## References
+
+- [easyTravel-Docker](https://github.com/Dynatrace/easyTravel-Docker)
+- [Grafana OSS on Docker Hub](https://hub.docker.com/r/grafana/grafana-oss)
+- [Set up Dynatrace OneAgent as a Docker container](https://docs.dynatrace.com/docs/ingest-from/setup-on-container-platforms/docker/set-up-dynatrace-oneagent-as-docker-container)
+- [Create a private Synthetic location](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/private-synthetic-locations/create-a-private-synthetic-location)
+- [Manage private Synthetic locations – Browser autoupdate](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/private-synthetic-locations/manage-private-synthetic-locations)
+- [Configure HTTP monitors in Classic](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/http-monitors-classic/configure-http-monitors-classic)
+- [Synthetic monitor authentication](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/general-information/synthetic-authentication)
+- [Dynatrace pricing](https://www.dynatrace.com/pricing/)
