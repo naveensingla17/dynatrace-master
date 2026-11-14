@@ -23,6 +23,8 @@ This document has two main parts.
    - 1.5 [API monitoring](#15-api-monitoring)
      - 1.5.1 [HTTP methods](#151-http-methods)
      - 1.5.2 [Dynatrace APIs](#152-dynatrace-apis)
+     - 1.5.3 [Response status code verification](#153-response-status-code-verification)
+     - 1.5.4 [HTTP status codes](#154-http-status-codes)
 2. [Authentication](#2-authentication)
    - 2.1 [Requirements](#21-requirements)
    - 2.2 [Limitations](#22-limitations)
@@ -94,6 +96,61 @@ An HTTP monitor can call APIs with authentication and any HTTP method.
 Dynatrace also provides its own APIs. You can browse and try them in the Swagger UI of your tenant:
 
 <https://nes80740.apps.dynatrace.com/platform/swagger-ui/index.html>
+
+#### 1.5.3 Response status code verification
+
+In an HTTP monitor, **Response status code verification** decides whether the monitor passes or fails based on the HTTP status code it gets back.
+
+By default, the monitor **fails** on any `4xx` or `5xx` response and **passes** on `1xx`–`3xx`. You can switch it to **Pass** and enter your own codes:
+
+| Format | Example |
+|--------|---------|
+| Exact code | `404` |
+| Comparison (`<`, `<=`, `>`, `>=`, `!=`) | `>=500` |
+| Range (minus sign, no spaces) | `406-410` |
+| Whole class | `3xx` |
+| Several values (comma-separated) | `3xx, 404, 406-410, >=500` |
+
+> **Follow redirects** is on by default (up to 10 redirects). Turn it off to check the status code of the redirect itself, for example `301`.
+
+#### 1.5.4 HTTP status codes
+
+| Class | Meaning |
+|-------|---------|
+| `1xx` | Informational |
+| `2xx` | Success |
+| `3xx` | Redirection |
+| `4xx` | Client error |
+| `5xx` | Server error |
+
+Common codes:
+
+| Code | Name | Meaning |
+|------|------|---------|
+| `100` | Continue | Interim response; the client should continue the request |
+| `101` | Switching Protocols | The server switches to the protocol the client asked for |
+| `200` | OK | The request succeeded |
+| `201` | Created | The request succeeded and a new resource was created (usually `POST`) |
+| `202` | Accepted | The request was received but not yet acted on |
+| `204` | No Content | Success, with no response body |
+| `301` | Moved Permanently | The URL changed permanently; the new URL is in the response |
+| `302` | Found | The URL changed temporarily; keep using the original URL |
+| `304` | Not Modified | The cached version can still be used |
+| `307` | Temporary Redirect | Like `302`, but the HTTP method must not change |
+| `308` | Permanent Redirect | Like `301`, but the HTTP method must not change |
+| `400` | Bad Request | Invalid request, for example malformed syntax |
+| `401` | Unauthorized | Authentication issue: the client must log in |
+| `403` | Forbidden | The client is known but has no access |
+| `404` | Not Found | The server cannot find the resource |
+| `405` | Method Not Allowed | The resource doesn't support this HTTP method |
+| `408` | Request Timeout | The server closed an idle connection |
+| `409` | Conflict | The request conflicts with the server's current state |
+| `429` | Too Many Requests | Rate limit reached |
+| `500` | Internal Server Error | The server hit an error it can't handle |
+| `501` | Not Implemented | The server doesn't support this HTTP method |
+| `502` | Bad Gateway | A gateway or proxy got an invalid response from the upstream server |
+| `503` | Service Unavailable | The server is down for maintenance or overloaded (temporary) |
+| `504` | Gateway Timeout | A gateway or proxy got no response from the upstream server in time |
 
 ---
 
@@ -184,3 +241,5 @@ References:
 - [Kerberos authentication overview (Microsoft)](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-authentication-overview)
 - [Synthetic monitor authentication (Dynatrace)](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/general-information/synthetic-authentication)
 - [Create a private Synthetic location (Dynatrace)](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/private-synthetic-locations/create-a-private-synthetic-location)
+- [Configure HTTP monitors in Classic (Dynatrace)](https://docs.dynatrace.com/docs/observe/digital-experience-classic/synthetic-monitoring-classic/http-monitors-classic/configure-http-monitors-classic)
+- [HTTP response status codes (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
